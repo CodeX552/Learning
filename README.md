@@ -1,4 +1,3 @@
-# Learning
 
 # 🌐 Web Development Practice – Daily Learning
 
