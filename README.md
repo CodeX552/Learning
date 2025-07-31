@@ -20,9 +20,5 @@ This repository includes daily exercises and mini-projects covering various aspe
 - 🛠️ Project Structure & Tools
 - ...and more
 
-Each folder typically represents a **day**, **topic**, or **project**.
 
----
-
-## 📁 Folder Structure
 
