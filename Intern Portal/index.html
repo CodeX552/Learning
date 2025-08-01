@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .reward-card {
+            transition: all 0.3s ease;
+        }
+        .reward-icon {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="app" class="min-h-screen">
+        <!-- Login/Signup View -->
+        <div id="auth-view" class="flex flex-col items-center justify-center min-h-screen gradient-bg p-4">
+            <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+                <div class="text-center mb-8">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/77ec1866-eda8-4361-af63-9c8bc9fd9087.png" alt="Intern Portal logo with graduation cap icon in blue and purple gradient colors" class="mx-auto mb-6 rounded-lg">
+                    <h1 class="text-3xl font-bold text-gray-800">Welcome to Intern Portal</h1>
+                    <p class="text-gray-600 mt-2">Sign in to access your dashboard</p>
+                </div>
+                
+                <form class="space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" id="password" class="mt-1 block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <button type="button" onclick="login()" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white gradient-bg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition duration-300">
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+                
+                <p class="mt-6 text-center text-sm text-gray-600">
+                    Don't have an account? <button onclick="toggleAuthForm()" class="font-medium text-purple-600 hover:text-purple-500">Sign up</button>
+                </p>
+            </div>
+        </div>
+
+        <!-- Dashboard View (Initially hidden) -->
+        <div id="dashboard-view" class="hidden">
+            <!-- Header -->
+            <header class="gradient-bg text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold">Intern Dashboard</h1>
+                            <p id="welcome-message" class="text-purple-100">Welcome back!</p>
+                        </div>
+                        <button onclick="logout()" class="px-4 py-2 bg-white text-purple-600 rounded-lg font-medium hover:bg-purple-50 transition">Sign Out</button>
+                    </div>
+                </div>
+            </header>
+
+            <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- User Info Card -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 card-hover">
+                        <div class="flex items-center space-x-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/94a9b519-6e8c-4df4-ac4b-7c747f4105de.png" alt="Profile picture of intern - young professional smiling in business casual attire" class="w-16 h-16 rounded-full border-2 border-purple-200">
+                            <div>
+                                <h2 id="intern-name" class="text-xl font-semibold text-gray-800">Intern</h2>
+                                <p class="text-gray-500">Software Engineering</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Referral Card -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 card-hover">
+                        <div class="flex flex-col">
+                            <h3 class="text-lg font-medium text-gray-500 mb-2">Your Referral Code</h3>
+                            <div class="flex items-center">
+                                <span id="referral-code" class="bg-purple-100 text-purple-800 px-4 py-2 rounded-lg font-mono font-bold text-xl">XXXXXXX</span>
+                                <button onclick="copyReferral()" class="ml-4 bg-gray-100 hover:bg-gray-200 p-2 rounded-lg">
+                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9b5dd412-a677-45e7-9dfb-5f82c1b4f839.png" alt="Copy icon - document with lines representing text being duplicated" class="w-6 h-6">
+                                </button>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-3">Share this code to earn rewards!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Donations Card -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden p-6 card-hover">
+                        <div class="flex flex-col">
+                            <h3 class="text-lg font-medium text-gray-500 mb-2">Total Donations Raised</h3>
+                            <div class="flex items-end space-x-2">
+                                <span id="donations-amount" class="text-3xl font-bold text-purple-600">$0</span>
+                                <span class="text-green-500 font-medium">+12% from last week</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-4">
+                                <div class="bg-purple-600 h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-2">65% of quarterly goal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rewards Section -->
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Your Rewards</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Reward 1 -->
+                        <div class="reward-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg">
+                            <div class="p-6 flex items-center space-x-4">
+                                <div class="reward-icon bg-purple-100 p-3 rounded-full">
+                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b2e1aa67-9f88-49a3-8231-b567ffc79358.png" alt="Gold trophy icon representing achievement reward" class="w-8 h-8">
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Top Performer</h3>
+                                    <p class="text-gray-500 text-sm">Reach 100 referrals</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-6 py-3 flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Unlocked at 100 points</span>
+                                <span class="text-xs font-medium text-purple-600">30/100</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Reward 2 -->
+                        <div class="reward-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg">
+                            <div class="p-6 flex items-center space-x-4">
+                                <div class="reward-icon bg-yellow-100 p-3 rounded-full">
+                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dfeaf31e-cb90-4b2e-b200-10e37e91c129.png" alt="Coffee cup icon representing coffee chat reward" class="w-8 h-8">
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Coffee Chat</h3>
+                                    <p class="text-gray-500 text-sm">30 min with CEO</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-6 py-3 flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Unlocked at 50 points</span>
+                                <span class="text-xs font-medium text-yellow-600">30/50</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Reward 3 -->
+                        <div class="reward-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg">
+                            <div class="p-6 flex items-center space-x-4">
+                                <div class="reward-icon bg-green-100 p-3 rounded-full">
+                                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/388e029c-6019-46bc-bd31-ad9719b38112.png" alt="Swag bag icon representing merchandise reward" class="w-8 h-8">
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">Company Swag</h3>
+                                    <p class="text-gray-500 text-sm">Exclusive merchandise</p>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-6 py-3 flex justify-between items-center">
+                                <span class="text-xs text-gray-500">Unlocked at 20 points</span>
+                                <span class="text-xs font-medium text-green-600">30/20</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaderboard Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Top Interns</h2>
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Department</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Referrals</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Donations</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leaderboard-body" class="bg-white divide-y divide-gray-200">
+                                    <!-- Filled by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Mock backend data
+        const mockData = {
+            user: {
+                name: "Alex Johnson",
+                email: "alex.johnson@example.com",
+                referralCode: "ALEX2025",
+                department: "Software Engineering",
+                donationsRaised: 1250,
+                rewardsProgress: {
+                    topPerformer: 30,
+                    coffeeChat: 30,
+                    companySwag: 30
+                }
+            },
+            leaderboard: [
+                { rank: 1, name: "Sarah Chen", department: "Marketing", referrals: 48, donations: 2150 },
+                { rank: 2, name: "Michael Rodriguez", department: "Engineering", referrals: 42, donations: 1950 },
+                { rank: 3, name: "Alex Johnson", department: "Engineering", referrals: 30, donations: 1250 },
+                { rank: 4, name: "Jasmine Williams", department: "Design", referrals: 28, donations: 1100 },
+                { rank: 5, name: "David Kim", department: "Product", referrals: 25, donations: 950 }
+            ]
+        };
+
+        // DOM Elements
+        const authView = document.getElementById('auth-view');
+        const dashboardView = document.getElementById('dashboard-view');
+        const welcomeMessage = document.getElementById('welcome-message');
+        const internName = document.getElementById('intern-name');
+        const referralCode = document.getElementById('referral-code');
+        const donationsAmount = document.getElementById('donations-amount');
+        const leaderboardBody = document.getElementById('leaderboard-body');
+
+        // Initialize dashboard
+        function initDashboard() {
+            authView.style.display = 'none';
+            dashboardView.style.display = 'block';
+            
+            // Set user data
+            welcomeMessage.textContent = `Welcome back, ${mockData.user.name.split(' ')[0]}!`;
+            internName.textContent = mockData.user.name;
+            referralCode.textContent = mockData.user.referralCode;
+            donationsAmount.textContent = `$${mockData.user.donationsRaised.toLocaleString()}`;
+            
+            // Populate leaderboard
+            leaderboardBody.innerHTML = '';
+            mockData.leaderboard.forEach(intern => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${intern.rank}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${intern.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${intern.department}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${intern.referrals}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$${intern.donations.toLocaleString()}</td>
+                `;
+                if (intern.name === mockData.user.name) {
+                    row.classList.add('bg-purple-50');
+                }
+                leaderboardBody.appendChild(row);
+            });
+        }
+
+        // Auth functions
+        function login() {
+            // In a real app, we would validate credentials here
+            initDashboard();
+        }
+
+        function logout() {
+            authView.style.display = 'flex';
+            dashboardView.style.display = 'none';
+        }
+
+        function toggleAuthForm() {
+            // Todo: Implement signup form toggle
+            alert("Sign up functionality coming soon!");
+        }
+
+        function copyReferral() {
+            navigator.clipboard.writeText(mockData.user.referralCode);
+            alert("Referral code copied to clipboard!");
+        }
+
+        // Mock API endpoints
+        async function fetchUserData() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(mockData.user);
+                }, 500);
+            });
+        }
+
+        async function fetchLeaderboard() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(mockData.leaderboard);
+                }, 500);
+            });
+        }
+    </script>
+</body>
+</html>
+
