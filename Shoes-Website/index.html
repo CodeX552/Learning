@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+    <title>Shoes Website</title>
+</head>
+<body>
+    <div class="main-container">
+        <div class="navbar">
+            <a href="#" class="logo" data-aos="zoom-in" data-aos-duration="1000" >
+                <img src="images/logo.png" alt="">
+            </a>
+            <ul id="sidemenu">
+                <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100"><a href="" class="active">Home</a></li>
+                <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="">About</a></li>
+                <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="">Location</a></li>
+                <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="">Pages</a></li>
+                <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500"><a href="">Contact</a></li>
+            </ul>
+            <div class="nav-btn" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="700">
+                <button class="login-btn">Login</button>
+                <button id="toggleBtn" class="toggle-btn">
+                    <img src="images/bar-icon.svg" alt="">
+                </button>
+            </div>
+        </div>
+            <div class="bottom-content">
+                <div class="bottom-left">
+                    <h1 data-aos="fade-right" data-aos-duration="1000" data-aos-delay="900">Your feet <br>deserve <br> the best</h1>
+                    <p data-aos="fade-left" data-aos-duration="1000" data-aos-delay="1100">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis optio porro illo laboriosam debitis blanditiis a repellat nemo cumque maiores facere iusto ab mollitia, voluptatem minus nesciunt iste facilis modi?</p>
+                    <div class="btn-sec">
+                        <button data-aos="fade-right" data-aos-duration="1000" data-aos-delay="1300">Shop Now</button>
+                        <button data-aos="fade-left" data-aos-duration="1000" data-aos-delay="1300">Category</button>
+                    </div>
+                </div>
+                <div class="bottom-right">
+                    <img src="images/bg-effact.png" alt="" class="bg-effect" data-aos="zoom-in" data-aos-duration="2000">
+                    <img src="images/shoes-img.png" alt="" class="shoes-img" data-aos="zoom-out" data-aos-duration="2000">
+                </div>
+            </div>
+    </div>
+    <script>
+        const toggleBtn = document.getElementById("toggleBtn")
+        const sideMenu = document.getElementById("sidemenu")
+
+        toggleBtn.addEventListener("click", () => {
+            sideMenu.classList.toggle("active")
+        })
+    </script>
+      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+      <script>
+        AOS.init({offset:0});
+      </script>
+</body>
+</html>

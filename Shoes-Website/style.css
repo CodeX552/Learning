@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Ga+Maamli&family=Kalnia+Glaze:wght@100..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    position: relative;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+button, input{
+    background-color: none;
+    outline: none;
+    border: none;
+}
+
+.main-container{
+    max-width: 1800px;
+    width: 100%;
+    min-height: 100vh;
+    height: fit-content;
+    background-color: #1b212c;
+    padding: 0 10%;
+}
+
+.navbar{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 0;   
+}
+
+.logo{
+    width: 80px;
+}
+
+.logo img{
+    width: 100%;
+}
+
+.navbar ul{
+    list-style-type: none;
+}
+
+.navbar ul li{
+    display: inline-block;
+    margin:  0 15px;
+}
+
+.navbar ul a{
+    color: white;
+    font-size: 14px;
+    position: relative;
+    transition: 0.2s linear;
+}
+
+.navbar ul a::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 3px;
+    background-color: #fb4b29;
+    transition: 0.2s linear;
+}
+
+.navbar ul a:hover::before, ul a:hover{
+    color: #fb4b29;
+    width: 100%;
+}
+
+.toggle-btn{
+    display: none;
+}
+
+.login-btn, .btn-sec button{
+    background-color: #fb4b29;
+    color: white;
+    width: auto;
+    padding: 0 15px;
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 2px solid #ed4827;
+    transition: 0.3s linear;
+}
+
+.login-btn:hover, .btn-sec button:hover{
+    background-color: transparent;
+    color: #ed4827;
+    border: 2px solid #ed4827;
+}
+
+.bottom-content{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.bottom-left{
+    width: 50%;
+    height: fit-content;
+    margin-top: 50px;
+}
+
+.bottom-left h1{
+    color: #ffd6ae;
+    font-size: 8rem;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+    line-height: 120px;
+    font-family: "Ga Maamli", sans-serif;
+    text-transform: uppercase;
+}
+
+.bottom-left p{
+    font-size: 18px;
+    color: #dbdbdb;
+    font-weight: 300;
+    margin: 10px 0 30px 0;
+}
+
+.btn-sec{
+    display: flex;
+    gap: 20px;
+}
+
+.btn-sec button:last-child{
+    border: 2px solid #ffd6ae;
+    background-color: transparent;
+    color: #ffd6ae;
+}
+
+.btn-sec button:last-child:hover{
+    background-color: #ffd6ae;
+    color: #fb4b29;
+}
+
+.bottom-right{
+    width: 50%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-effect{
+    width: 120%;
+}
+
+.shoes-img{
+    width: 100%;
+    position: absolute;
+    top: 5%;
+}
+
+@media (max-width:1100px) {
+    .main-container{
+        padding: 0 5%;
+    }
+
+    .bottom-left h1{
+        width: 100%;
+        font-size: 60px;
+        line-height: 60px;
+    }
+
+    .bottom-left p{
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 800px) {
+    .logo{
+        width: 70px;
+        z-index: 1000;
+    }
+
+    .login-btn{
+        z-index: 1000;
+        margin-top: -10px;
+    }
+
+    .login-btn, .btn-sec button{
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+
+    .nav-btn{
+        width: fit-content;
+        display: flex;
+        gap: 20px;
+    }
+
+    .navbar .toggle-btn{
+        display: block;
+        width: 30px;
+        z-index: 100;
+        margin-top: -5px;
+        cursor: pointer;
+    }
+
+    .toggle-btn img{
+        width: 100%;
+    }
+
+    .navbar ul{
+        display: none;
+        position: absolute;
+        left: -5%;
+        top: 0;
+        width: 110%;
+        background-color: #1b212c;
+        z-index: 100;
+        padding: 80px 0 25px 0;
+        
+    }
+    
+    .navbar ul li{
+        width: 100%;
+        text-align: center;
+        margin: 8px 0;
+    }
+
+    .login-btn{
+        z-index: 1000;
+    }
+
+    .navbar ul.active{
+        display: block;
+    }
+
+    .bottom-content{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bottom-left{
+        max-width: 450px;
+        width: 100%;
+        margin-top: 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .bottom-left h1{
+        font-size: 45px;
+        line-height: 45px;
+    }
+
+    .btn-sec{
+        gap: 10px;
+    }
+
+    .bottom-right{
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .shoes-img{
+        width: 80%;
+    }
+
+    .bg-effect{
+        width: 100%;
+    }
+}
+
+
+
